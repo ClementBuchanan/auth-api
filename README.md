@@ -9,7 +9,7 @@ ACL: Access Control List (A role based acess control)
 ## Setup
 
 - .env requirements
-  - PORT - 8080
+  - PORT - 3333
 
 # Running the app
 
@@ -18,9 +18,7 @@ ACL: Access Control List (A role based acess control)
   - Returns Object
     ![Response](assets/response.jpg)
 
-
 ## UML
-
 (created with Miro)
 ![Authentication UML](assets/auth-uml.jpg)
 
