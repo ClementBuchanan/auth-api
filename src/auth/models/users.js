@@ -29,12 +29,12 @@ users.virtual('capabilities').get(function () {
     return acl[this.role];
 });
 
-users.pre('save', async () => {
+users.pre('save', async function () {
     this.password = await bcrypt.hash(this.password, 10);
 });
 
 // time to sign in
-users.statics.authenticateBasic = async (username, password) => {
+users.statics.authenticateBasic = async function (username, password) {
     let userDetails = await this.findOne({ username });
     const valid = await bcrypt.compare(password, userDetails.password); // compare plain text from the req password with the pass in the db (hashed)
     if (valid) return userDetails;
