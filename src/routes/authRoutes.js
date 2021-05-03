@@ -2,16 +2,16 @@
 
 const express = require('express');
 
-const User = require('./models/users.js');
-const basicAuth = require('./middleware/basic.js');
-const bearerAuth = require('./middleware/bearer.js.js');
-const permissions = require('./middleware/acl.js.js');
+const User = require('../auth/models/users.js');
+const basicAuth = require('../auth/middleware/basic.js');
+const bearerAuth = require('../auth/middleware/bearer.js');
+const permissions = require('../auth/middleware/acl.js');
 
 const auth = express.Router();
 
 // user is attached to req.body
 auth.post('/signup', async (req, res) => {
-    let user = new User(req.body);
+    let user = await new User(req.body);
     const record = await user.save();
     res.status(201).json(record); // we are sending this back now so that we can see/test the user
 });
