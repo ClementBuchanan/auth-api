@@ -4,7 +4,7 @@ ACL: Access Control List (A role based acess control)
 # Author: Clement Buchanan
 
 - Test Report
-- Front End
+- [Front End](https://auth-api-lab08.herokuapp.com/)
 
 ## Setup
 
@@ -16,7 +16,7 @@ ACL: Access Control List (A role based acess control)
 - node index.js
 - Endpoint: /signup
   - Returns Object
-    ![Response](assets/response.jpg)
+    ![Response](assets/response.png)
 
 ## UML
 (created with Miro)
