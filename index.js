@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const server = require('./src/server.js');
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/auth-demo-cool';
 
-const mongooseOptions =  {
+const mongooseOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true
@@ -12,5 +12,5 @@ const mongooseOptions =  {
 
 mongoose.connect(MONGODB_URI, mongooseOptions)
   .then(() => {
-    server.start(3333);
+    server.start(process.env.PORT);
   });
