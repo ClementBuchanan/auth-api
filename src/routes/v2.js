@@ -4,7 +4,8 @@ const bearer = require('../auth/middleware/bearer.js');
 const acl = require('../auth/middleware/acl.js');
 const fs = require('fs');
 const express = require('express');
-const Collection = require('../auth/models/data-collection.js');
+const Collection = require('../models/data-collection.js');
+
 
 const router = express.Router();
 
@@ -17,7 +18,7 @@ router.param('model', (req, res, next) => {
     next();
   } else {
     console.log(modelName);
-    const fileName = `../auth/models/${modelName}/model.js`;
+    const fileName = `${__dirname}/../models/${modelName}/model.js`;
     console.log(fileName);
     if (fs.existsSync(fileName)) {
       const model = require(fileName);

@@ -12,11 +12,10 @@ const users = new mongoose.Schema({
 
 const appSecret = process.env.APP_SECRET || 'coolfunsecret';
 
-users.virtual('token').get(() => {
+users.virtual('token').get(function () {
     let tokenDetails = {
         username: this.username,
     }
-
     return jwt.sign(tokenDetails, appSecret);
 })
 
@@ -42,11 +41,21 @@ users.statics.authenticateBasic = async function (username, password) {
 }
 
 // you are already signed in - let's check to make sure
-users.statics.authenticateToken = async (token) => {
-    const parsed = jwt.verify(token, appSecret);
-    const foundUser = this.findOne({ username: parsed.username });
-    if (foundUser) return foundUser;
-    throw new Error('user not found');
-}
+users.statics.authenticateToken = async function (token) {
+    try {
+        const parsed = jwt.verify(token, appSecret);
 
+        const foundUser = await this.findOne({ username: parsed.username });
+        console.log(parsed, foundUser);
+        if (foundUser) return foundUser;
+        throw new Error('user not found');
+    }
+    catch (e) {
+        console.log(e);
+        return null
+    }
+}
+// users.statics.generateToken = async () => {
+//     return jwt.sign({ username: this.username }, process.env.SECRET);
+// };
 module.exports = mongoose.model('users', users);

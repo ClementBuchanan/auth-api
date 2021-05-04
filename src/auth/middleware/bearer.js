@@ -1,13 +1,23 @@
 'use strict';
 
-const users = require('../models/users.js');
+const users = require('../../models/users.js');
 
 module.exports = async (req, res, next) => {
-    const token = req.headers.authorization.split(' ').pop();
+    try {
+        const token = req.headers.authorization.split(' ').pop();
+        const validUser = await users.authenticateToken(token)
+        if (validUser) {
+            // .then(validUser => {
+            req.user = validUser;
+            return next();
+            // })
+        }
+        res.status(403).send('invalid');
 
-    users.authenticateToken(Token)
-        .then(validUser => {
-            req.user = vslidUser;
-            next();
-        })
+    }
+    catch (e) {
+        console.log(e);
+        res.status(403).send('invalid');
+    }
+
 }

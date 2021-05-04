@@ -1,6 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
+require('mongoose-schema-jsonschema')(mongoose);
 
 const foodSchema = mongoose.Schema({
   name: { type: String, required: true },
