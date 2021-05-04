@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const express = require('express');
-const Collection = require('../auth/models/data-collection.js');
+const Collection = require('../models/data-collection.js');
 
 const router = express.Router();
 
@@ -15,7 +15,6 @@ router.param('model', (req, res, next) => {
     next();
   } else {
     const fileName = `${__dirname}/../models/${modelName}/model.js`;
-    console.log(fileName);
     if (fs.existsSync(fileName)) {
       const model = require(fileName);
       models.set(modelName, new Collection(model));
